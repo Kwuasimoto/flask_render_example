@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 import os
 
 # Determine environment
-prod = True if os.environ.get("PRODUCTION") == "production" else False
+prod = True if os.getenv("PRODUCTION") == "production" else False
 
 app = Flask(__name__)
 
