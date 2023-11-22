@@ -1,8 +1,6 @@
 ## Render, Github, Flask and DialogFlow integration Example.
 from flask import Flask, request, jsonify
 
-## Use gunicorn on linux / Unix based os's
-from waitress import serve
 import os
 
 # Determine environment
@@ -21,6 +19,6 @@ def example_route():
 
 if __name__ == "__main__":
     if prod:
-        serve(app, host="Determined by render enviroment variable", port=8080)
+        app.run()
     else:
         app.run(debug=True, host="127.0.0.1", port=8080)
