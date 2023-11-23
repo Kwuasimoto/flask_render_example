@@ -25,11 +25,7 @@ prod = True if os.getenv("PRODUCTION") == "production" else False
 # Create Flask App
 app = Flask(__name__)
 
-origin = (
-    "https://flask-render-example-x3ol.onrender.com"
-    if prod
-    else "http://localhost:5174"
-)
+origin = "https://ui-example-rec.onrender.com" if prod else "http://localhost:5174"
 
 # Enable Cors
 CORS(
