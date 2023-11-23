@@ -1,5 +1,6 @@
 ## Render, Github, Flask and DialogFlow integration Example.
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from google.api_core.exceptions import InvalidArgument
 from google.cloud.dialogflow_v2 import SessionsClient
 from google.cloud.dialogflow_v2.types import TextInput, QueryInput
@@ -24,6 +25,27 @@ prod = True if os.getenv("PRODUCTION") == "production" else False
 # Create Flask App
 app = Flask(__name__)
 
+origin = (
+    "https://flask-render-example-x3ol.onrender.com"
+    if prod
+    else "http://localhost:5174"
+)
+
+# Enable Cors
+CORS(
+    app,
+    supports_credentials=True,
+    origins=[origin],
+    methods=["POST", "GET", "OPTIONS"],
+    allow_headers=[
+        "Access-Control-Allow-Credentials",
+        "Access-Control-Allow-Headers",
+        "Access-Control-Allow-Methods",
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+    ],
+)
+
 
 @app.route("/test-df", methods=["POST"])
 def example_df_route():
@@ -47,8 +69,8 @@ def example_df_route():
 
 @app.route("/test", methods=["POST"])
 def example_route():
-    data = request.get_json(silent=True)
-
+    data = request.get_data(as_text=True)
+    print(data)
     # Return request to client
     return jsonify(data)
 
