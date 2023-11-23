@@ -1,3 +1,4 @@
 Flask
 Gunicorn
 Google-Cloud-Dialogflow
+Flask-Cors
