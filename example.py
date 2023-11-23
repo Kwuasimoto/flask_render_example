@@ -22,6 +22,8 @@ session = session_client.session_path(project_id, session_id)
 # Determine environment
 prod = True if os.getenv("PRODUCTION") == "production" else False
 
+print(prod)
+
 # Create Flask App
 app = Flask(__name__)
 
@@ -47,6 +49,8 @@ CORS(
 def example_df_route():
     data = request.get_json(silent=True)
     message = data["message"]
+
+    print(message)
 
     text_input = TextInput(text=message, language_code=dialogflow_lang_code)
     query_input = QueryInput(text=text_input)
